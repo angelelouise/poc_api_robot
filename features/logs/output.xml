@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0 (Python 3.9.2 on win32)" generated="20210408 18:15:01.922" rpa="false" schemaversion="2">
+<suite id="s1" name="Specifications" source="E:\poc_api_robot\specifications">
+<suite id="s1-s1" name="Signup Bdd Spec" source="E:\poc_api_robot\specifications\signup_bdd_spec.robot">
+<test id="s1-s1-t1" name="Cenário 01: Criar novo usuário">
+<kw name="Dado que eu iniciei a sessão" library="setup" sourcename="Dado ${keyword}">
+<kw name="Run Keyword" library="BuiltIn">
+<arg>${keyword}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Que eu iniciei a sessão" library="signup_bdd_steps">
+<kw name="Criar sessão" library="signup_bdd_steps_definitions">
+<arg>mysession</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>${NAME_SESSION}</arg>
+<arg>${DEFAULT_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210408 18:15:02.218" level="INFO">Creating Session using : alias=mysession, url=http://18.189.43.194:3333, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210408 18:15:02.218" endtime="20210408 18:15:02.219"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.218" endtime="20210408 18:15:02.219"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.218" endtime="20210408 18:15:02.219"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.218" endtime="20210408 18:15:02.219"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.217" endtime="20210408 18:15:02.219"/>
+</kw>
+<kw name="Quando enviar uma requisição de cadastro de novo usuário" library="setup" sourcename="Quando ${keyword}">
+<kw name="Run Keyword" library="BuiltIn">
+<arg>${keyword}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Enviar uma requisição de cadastro de novo usuário" library="signup_bdd_steps">
+<kw name="Criar massa de dados do usuário" library="signup_bdd_steps_definitions">
+<kw name="Name" library="FakerLibrary">
+<var>${FAKE_NAME}</var>
+<doc>:example 'John Doe'</doc>
+<msg timestamp="20210408 18:15:02.220" level="INFO">${FAKE_NAME} = Marie Knight</msg>
+<status status="PASS" starttime="20210408 18:15:02.220" endtime="20210408 18:15:02.220"/>
+</kw>
+<kw name="Email" library="FakerLibrary">
+<var>${FAKE_EMAIL}</var>
+<msg timestamp="20210408 18:15:02.221" level="INFO">${FAKE_EMAIL} = tuckeramber@ramos.com</msg>
+<status status="PASS" starttime="20210408 18:15:02.220" endtime="20210408 18:15:02.221"/>
+</kw>
+<kw name="Password" library="FakerLibrary">
+<var>${FAKE_PWD}</var>
+<doc>Generate a random password of the specified ``length``.</doc>
+<msg timestamp="20210408 18:15:02.221" level="INFO">${FAKE_PWD} = hCV@6KaysX</msg>
+<status status="PASS" starttime="20210408 18:15:02.221" endtime="20210408 18:15:02.221"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${DATA}</var>
+<arg>name=${FAKE_NAME}</arg>
+<arg>email=${FAKE_EMAIL}</arg>
+<arg>password=${FAKE_PWD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210408 18:15:02.221" level="INFO">${DATA} = {'name': 'Marie Knight', 'email': 'tuckeramber@ramos.com', 'password': 'hCV@6KaysX'}</msg>
+<status status="PASS" starttime="20210408 18:15:02.221" endtime="20210408 18:15:02.221"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${HEADER}</var>
+<arg>Content-Type=${DEFAULT_CONTENT_TYPE}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210408 18:15:02.222" level="INFO">${HEADER} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210408 18:15:02.221" endtime="20210408 18:15:02.222"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${DATA}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210408 18:15:02.222" level="INFO">${DATA} = {'name': 'Marie Knight', 'email': 'tuckeramber@ramos.com', 'password': 'hCV@6KaysX'}</msg>
+<status status="PASS" starttime="20210408 18:15:02.222" endtime="20210408 18:15:02.222"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${HEADER}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210408 18:15:02.222" level="INFO">${HEADER} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210408 18:15:02.222" endtime="20210408 18:15:02.222"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.220" endtime="20210408 18:15:02.222"/>
+</kw>
+<kw name="Enviar requisição de cadastro de usuário" library="signup_bdd_steps_definitions">
+<arg>${DATA}</arg>
+<arg>${HEADER}</arg>
+<kw name="Post On Session" library="RequestsLibrary">
+<var>${RESPONSE}</var>
+<arg>mysession</arg>
+<arg>${DEFAULT_SIGNUP_ENDPOINT}</arg>
+<arg>json=${JSON}</arg>
+<arg>headers=${HEADER}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20210408 18:15:02.476" level="INFO">POST Request : url=http://18.189.43.194:3333/signup 
+ path_url=/signup 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '84'} 
+ body=b'{"name": "Marie Knight", "email": "tuckeramber@ramos.com", "password": "hCV@6KaysX"}' 
+ </msg>
+<msg timestamp="20210408 18:15:02.476" level="INFO">POST Response : url=http://18.189.43.194:3333/signup 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '142', 'ETag': 'W/"8e-4IDpgktMc6ytsZTuEDhfk112sNQ"', 'Date': 'Thu, 08 Apr 2021 21:15:03 GMT', 'Connection': 'keep-alive'} 
+ body={"_id":"606f7257a4e5e6002778d040","name":"Marie Knight","email":"tuckeramber@ramos.com","password":"dc4f975a4c3e946d61e7e04af18ba745","__v":0} 
+ </msg>
+<msg timestamp="20210408 18:15:02.476" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210408 18:15:02.223" endtime="20210408 18:15:02.476"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${RESPONSE.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210408 18:15:02.476" endtime="20210408 18:15:02.477"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${RESPONSE.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210408 18:15:02.477" endtime="20210408 18:15:02.477"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${RESPONSE}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210408 18:15:02.478" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210408 18:15:02.478" endtime="20210408 18:15:02.478"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.222" endtime="20210408 18:15:02.478"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.220" endtime="20210408 18:15:02.478"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.219" endtime="20210408 18:15:02.478"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.219" endtime="20210408 18:15:02.478"/>
+</kw>
+<kw name="Então o usuário deve ser cadastrado com sucesso" library="setup" sourcename="Então ${keyword}">
+<kw name="Run Keyword" library="BuiltIn">
+<arg>${keyword}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="O usuário deve ser cadastrado com sucesso" library="signup_bdd_steps">
+<kw name="Verificar status da resposta" library="signup_bdd_steps_definitions">
+<arg>200</arg>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>${STATUS}</arg>
+<arg>${RESPONSE}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20210408 18:15:02.479" endtime="20210408 18:15:02.479"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.479" endtime="20210408 18:15:02.480"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.479" endtime="20210408 18:15:02.480"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.479" endtime="20210408 18:15:02.480"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.478" endtime="20210408 18:15:02.480"/>
+</kw>
+<kw name="E uma resposta deve ser retornada com a informação de id gerado pelo sistema" library="setup" sourcename="E ${keyword}">
+<kw name="Run Keyword" library="BuiltIn">
+<arg>${keyword}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Uma resposta deve ser retornada com a informação de id gerado pelo sistema" library="signup_bdd_steps">
+<kw name="Verificar o id da resposta" library="signup_bdd_steps_definitions">
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${RESPONSE.json()}</arg>
+<arg>_id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20210408 18:15:02.481" endtime="20210408 18:15:02.482"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.481" endtime="20210408 18:15:02.482"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.481" endtime="20210408 18:15:02.482"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.481" endtime="20210408 18:15:02.482"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.480" endtime="20210408 18:15:02.482"/>
+</kw>
+<kw name="E com o nome cadastrado" library="setup" sourcename="E ${keyword}">
+<kw name="Run Keyword" library="BuiltIn">
+<arg>${keyword}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Com o nome cadastrado" library="signup_bdd_steps">
+<kw name="Verificar o nome da resposta" library="signup_bdd_steps_definitions">
+<arg>${DATA}</arg>
+<kw name="Get From Dictionary" library="Collections">
+<var>${NOME}</var>
+<arg>${NOME}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20210408 18:15:02.483" level="INFO">${NOME} = Marie Knight</msg>
+<status status="PASS" starttime="20210408 18:15:02.483" endtime="20210408 18:15:02.483"/>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<arg>${RESPONSE.json()}</arg>
+<arg>name</arg>
+<arg>${NOME}</arg>
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<status status="PASS" starttime="20210408 18:15:02.483" endtime="20210408 18:15:02.484"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.483" endtime="20210408 18:15:02.484"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.483" endtime="20210408 18:15:02.484"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.482" endtime="20210408 18:15:02.484"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.482" endtime="20210408 18:15:02.484"/>
+</kw>
+<kw name="E com o email cadastrado" library="setup" sourcename="E ${keyword}">
+<kw name="Run Keyword" library="BuiltIn">
+<arg>${keyword}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Com o email cadastrado" library="signup_bdd_steps">
+<kw name="Verificar o email da resposta" library="signup_bdd_steps_definitions">
+<arg>${DATA}</arg>
+<kw name="Get From Dictionary" library="Collections">
+<var>${EMAIL}</var>
+<arg>${EMAIL}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20210408 18:15:02.486" level="INFO">${EMAIL} = tuckeramber@ramos.com</msg>
+<status status="PASS" starttime="20210408 18:15:02.486" endtime="20210408 18:15:02.486"/>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<arg>${RESPONSE.json()}</arg>
+<arg>email</arg>
+<arg>${EMAIL}</arg>
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<status status="PASS" starttime="20210408 18:15:02.486" endtime="20210408 18:15:02.486"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.485" endtime="20210408 18:15:02.487"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.485" endtime="20210408 18:15:02.487"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.485" endtime="20210408 18:15:02.487"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.485" endtime="20210408 18:15:02.487"/>
+</kw>
+<kw name="E com a senha cadastrada criptografada" library="setup" sourcename="E ${keyword}">
+<kw name="Run Keyword" library="BuiltIn">
+<arg>${keyword}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Com a senha cadastrada criptografada" library="signup_bdd_steps">
+<kw name="Verificar a senha da resposta" library="signup_bdd_steps_definitions">
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${RESPONSE.json()}</arg>
+<arg>password</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20210408 18:15:02.488" endtime="20210408 18:15:02.488"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.488" endtime="20210408 18:15:02.488"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.487" endtime="20210408 18:15:02.488"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.487" endtime="20210408 18:15:02.488"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.487" endtime="20210408 18:15:02.488"/>
+</kw>
+<status status="PASS" starttime="20210408 18:15:02.217" endtime="20210408 18:15:02.489"/>
+</test>
+<doc>Testes do endpoint de criar novo usuário (signup)</doc>
+<status status="PASS" starttime="20210408 18:15:01.939" endtime="20210408 18:15:02.490"/>
+</suite>
+<status status="PASS" starttime="20210408 18:15:01.923" endtime="20210408 18:15:02.491"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Specifications">Specifications</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Signup Bdd Spec">Specifications.Signup Bdd Spec</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
