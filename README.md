@@ -66,12 +66,11 @@ Para executar os testes de api utilize o seguinte comando:
   
     ├── docker                    # Diretório de arquivos do docker  
     ├── features                  # Pastas e arquivos do framework (root)  
-      ├── logs                    # Diretório para armazenar o relatório de execução dos testes  
       ├── resources               # Diretório para os arquivos helpers, como variáveis, métodos auxiliares e configurações.  
         ├── fixtures              # Diretório de dados default.  
       ├── steps_definitios        # Passo-a-passo dos testes BDD (auxiliar da pasta specifications)  
       ├── specifications          # Suíte de testes com as suas especificações em BDD  
-    ├── .gitignore                # Files and Folders to ignore in repository.  
+    ├── logs                      #Diretório para armazenar o relatório de execução dos testes     
     └── README.md                 # Documentação do projeto  
 
 ### Testes usando o BDD
