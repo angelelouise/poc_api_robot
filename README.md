@@ -70,7 +70,7 @@ Para executar os testes de api utilize o seguinte comando:
         ├── fixtures              # Diretório de dados default.  
       ├── steps_definitios        # Passo-a-passo dos testes BDD (auxiliar da pasta specifications)  
       ├── specifications          # Suíte de testes com as suas especificações em BDD  
-    ├── logs                      #Diretório para armazenar o relatório de execução dos testes     
+    ├── logs                      # Diretório para armazenar o relatório de execução dos testes     
     └── README.md                 # Documentação do projeto  
 
 ### Testes usando o BDD
