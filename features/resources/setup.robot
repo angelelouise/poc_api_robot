@@ -5,6 +5,10 @@ Library         RequestsLibrary
 Library         Collections
 Library         BuiltIn
 Library         FakerLibrary
+Library         OperatingSystem
+Library         JsonValidator
+#Library         REST    http://18.189.43.194:3333 
+Library         jsonschema  
 
 #Fixtures
 Resource       fixtures/api_variaveis.robot
@@ -12,6 +16,12 @@ Resource       fixtures/api_variaveis.robot
 #BDD definição de passos
 Resource        ../steps_definitions/signup_bdd_steps.robot
 Resource        ../steps_definitions/signup_bdd_steps_definitions.robot
+
+#Teste
+
+Resource        ../bdd_testcase/signup_bdd_testcase.robot
+Resource        ../bdd_testcase/signup_testcase.robot
+
 
 ***Keywords***
 #Configuração do gherkin para pt-br
@@ -25,3 +35,7 @@ Então ${keyword}
 E ${keyword}
     Run keyword     ${keyword}
 
+# configuração teste
+
+Cenario ${identificador}
+    Run keyword     ${identificador}
