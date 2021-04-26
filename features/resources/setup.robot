@@ -11,14 +11,14 @@ Library         JsonValidator
 Library         jsonschema  
 
 #Fixtures
-Resource       fixtures/api_variaveis.robot
+Resource        fixtures/api_variaveis.robot
+Resource       fixtures/api_mensagens.robot
 
 #BDD definição de passos
 Resource        ../steps_definitions/signup_bdd_steps.robot
 Resource        ../steps_definitions/signup_bdd_steps_definitions.robot
 
 #Teste
-
 Resource        ../bdd_testcase/signup_bdd_testcase.robot
 Resource        ../bdd_testcase/signup_testcase.robot
 

@@ -11,3 +11,5 @@ C02
     TC2: Cadastro de usuário com e-mail vazio
     TC3: Cadastro de usuário com nome vazio
     TC4: Cadastro de usuário com senha vazia
+C03
+    TC5: Cadastro de usuário que já existe

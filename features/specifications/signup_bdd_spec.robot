@@ -32,3 +32,10 @@ Cenario 02: Criar usuário com dados inválidos       C02
     ...                 Dado que eu iniciei a sessão
     ...                 Quando enviar uma requisição de cadastro com dados inválidos
     ...                 Então uma mensagem de erro deve ser retornada
+
+Cenario 03: Criar usuário que já existe       C03
+    [Documentation]
+    ...                 Dado que eu iniciei a sessão
+    ...                 E já existe um usuário cadastrado
+    ...                 Quando enviar uma requisição de cadastro com os dados de um usuário já existente
+    ...                 Então uma mensagem de erro deve ser retornada

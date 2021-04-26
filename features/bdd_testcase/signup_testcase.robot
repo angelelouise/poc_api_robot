@@ -12,10 +12,25 @@ TC1: Cadastro de usuário com sucesso
     Verificar payload da resposta   schemas/signup_response_schema.json     ${RESPONSE.json()}
 TC2: Cadastro de usuário com e-mail vazio
     Criar massa de dados    ${FALSE}   ${TRUE}    ${TRUE}
+    Enviar requisição       post        ${DATA}     ${HEADER}
+    Verificar status da response    412
+    Verificar mensagem de erro      ${MSG_ERROR_SIGNUP_01} 
 TC3: Cadastro de usuário com nome vazio
     Criar massa de dados    ${TRUE}    ${FALSE}   ${TRUE}
+    Enviar requisição       post        ${DATA}     ${HEADER}
+    Verificar status da response    412
+    Verificar mensagem de erro      ${MSG_ERROR_SIGNUP_02} 
 TC4: Cadastro de usuário com senha vazia
     Criar massa de dados    ${TRUE}    ${TRUE}    ${FALSE}
+    Enviar requisição       post        ${DATA}     ${HEADER}
+    Verificar status da response    412
+    Verificar mensagem de erro      ${MSG_ERROR_SIGNUP_03} 
+TC5: Cadastro de usuário que já existe
+    Criar massa de dados    ${TRUE}    ${TRUE}    ${TRUE}
+    Enviar requisição       post    ${DATA}     ${HEADER}
+    Enviar requisição       post    ${DATA}     ${HEADER}
+    Verificar status da response    409
+    Verificar mensagem de erro      ${MSG_ERROR_SIGNUP_04} 
 
 ##--------------------------------------- Keywords Auxiliares-------------------------------##
 Criar massa de dados
@@ -69,10 +84,15 @@ Enviar requisição
     log to console      ${RESPONSE.content}
     Set Test Variable   ${RESPONSE}
 
-POST_API    
+
+POST_API
+    [Documentation]     
+        ...     Ao chamar essa keyword passar os parâmetros:
+        ...     O payload em JSON
+        ...     O header da requisição    
    [Arguments]      ${DATA}     ${HEADER} 
 
-   ${RESPONSE}=        POST On Session     mysession   ${DEFAULT_SIGNUP_ENDPOINT}  json=${DATA}    headers=${HEADER}
+   ${RESPONSE}=        POST On Session     mysession   ${DEFAULT_SIGNUP_ENDPOINT}  json=${DATA}    headers=${HEADER}    expected_status=any
     # ${RESPONSE}=        Call Post Request     headers=${HEADER}   endpoint=${DEFAULT_URL}    fullstring=${DEFAULT_SIGNUP_ENDPOINT}   data=${DATA}
     # ${RESPONSE}=    POST        ${DEFAULT_SIGNUP_ENDPOINT}      ${DATA}
     # [Teardown]  Output  response body     ${OUTPUTDIR}/signup_response.json
@@ -82,7 +102,7 @@ POST_API
 Verificar status da response
     [Documentation]     
         ...     Ao chamar essa keyword passar o resultado experado da response:
-        ...     Tipo inteiiro
+        ...     Tipo inteiro
     [Arguments]     ${STATUS}
 
     Status Should Be    ${STATUS}    ${RESPONSE}
@@ -111,11 +131,7 @@ Verificar payload da resposta
     ${EXPECTED_RESPONSE}=   Construir resposta esperada     ${DATA}
     Dictionaries Should Be Equal        ${RESPONSE}    ${EXPECTED_RESPONSE}
 
-
-    # Expect Response Body     ${EXPECTED_RESPONSE}
     # ${EXPECTED_RESPONSE}=    OperatingSystem.Get File   ${EXECDIR}${/}${JSONFILE}
-
-    # Validate Response Contains Expected Response    ${RESPONSE.json()}      ${EXPECTED_RESPONSE}
 
 Construir resposta esperada
     [Documentation]
@@ -132,5 +148,8 @@ Construir resposta esperada
 
     [Return]    ${EXPECTED_RESPONSE}
 
+Verificar mensagem de erro
+    [Arguments]     ${MSG_ERROR}
 
+    Should be equal     ${RESPONSE.json()["error"]}      ${MSG_ERROR}
 
