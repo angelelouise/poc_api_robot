@@ -68,12 +68,15 @@ Para executar os testes de api utilize o seguinte comando:
     ├── features                  # Pastas e arquivos do framework (root)  
       ├── resources               # Diretório para os arquivos helpers, como variáveis, métodos auxiliares e configurações.  
         ├── fixtures              # Diretório de dados default.  
-      ├── steps_definitios        # Passo-a-passo dos testes BDD (auxiliar da pasta specifications)  
+      ├── steps_definitios        # Passo-a-passo dos testes BDD (auxiliar da pasta specifications)
+      ├── bdd_testcase            # Abordagem alternativa do BDD (auxiliar da pasta specifications)
       ├── specifications          # Suíte de testes com as suas especificações em BDD  
     ├── logs                      # Diretório para armazenar o relatório de execução dos testes     
     └── README.md                 # Documentação do projeto  
 
 ### Testes usando o BDD
+
+#### BDD: Abordagem regular
 
 Os cenários são escritos de forma ubíqua utilizando das Keywords.
 O conjunto de Keywords do arquivo signup_bdd_steps.robot é responsável por dizer o que cada frase do cenário signup_bdd_spec.robot irá executar. Já o arquivo signup_bdd_steps_definitions é responsável por definir cada ação que as frases do cenário irão executar (mais baixo nível).
@@ -81,6 +84,10 @@ Dessa forma, a ordem de hierarquia entre os arquivos é:
 ````
 signup_bdd_spec.robot -> signup_bdd_steps.robot -> signup_bdd_steps_definitions.robot
 ````
+#### BDD: Abordagem alternativa
+
+Os cenários são escritos em forma de documentação e vinculados a um identificador. Exemplo: Cenario C01.
+O diretório ''bdd_testcase'' é responsável por vincular os identificadores do cenário a um ou mais casos de testes, responsáveis por verificar o comportamento definido pelo cenário.
 
 ### Relatório de execução
 
